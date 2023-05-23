@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/maucaruso/clean-api-tdd-nodejs/issues"
   },
-  "homepage": "https://github.com/maucaruso/clean-api-tdd-nodejs#readme"
+  "homepage": "https://github.com/maucaruso/clean-api-tdd-nodejs#readme",
+  "devDependencies": {
+    "standard": "^17.0.0"
+  }
 }

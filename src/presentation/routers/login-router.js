@@ -1,6 +1,5 @@
 const HttpResponse = require('../helpers/http-response')
-const InvalidParamError = require('../helpers/invalid-param-error')
-const MissigParamError = require('../helpers/missing-param-error')
+const { InvalidParamError, MissingParamError } = require('../errors')
 
 module.exports = class LoginRouter {
   constructor (authUseCase, emailValidator) {
@@ -13,7 +12,7 @@ module.exports = class LoginRouter {
       const { email, password } = httpRequest.body
 
       if (!email) {
-        return HttpResponse.badRequest(new MissigParamError('email'))
+        return HttpResponse.badRequest(new MissingParamError('email'))
       }
 
       if (!this.emailValidator.isValid(email)) {
@@ -21,7 +20,7 @@ module.exports = class LoginRouter {
       }
 
       if (!password) {
-        return HttpResponse.badRequest(new MissigParamError('password'))
+        return HttpResponse.badRequest(new MissingParamError('password'))
       }
 
       const accessToken = await this.authUseCase.auth(email, password)

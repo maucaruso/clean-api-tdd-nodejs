@@ -1,7 +1,4 @@
-const InvalidParamError = require('../helpers/invalid-param-error')
-const MissigParamError = require('../helpers/missing-param-error')
-const ServerError = require('../helpers/server-error')
-const UnauthorizedError = require('../helpers/unauthorized-error')
+const { InvalidParamError, MissingParamError, ServerError, UnauthorizedError } = require('../errors')
 const LoginRouter = require('./login-router')
 
 const makeSut = () => {
@@ -75,7 +72,7 @@ describe('Login Router', () => {
 
     const httpResponse = await sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissigParamError('email'))
+    expect(httpResponse.body).toEqual(new MissingParamError('email'))
   })
 
   it('Should return 400 if no password is provided', async () => {
@@ -89,7 +86,7 @@ describe('Login Router', () => {
 
     const httpResponse = await sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissigParamError('password'))
+    expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
 
   it('Should return 500 if no httpRequest is provided', async () => {
